@@ -1,5 +1,6 @@
 # Importing flask 
 from flask import Flask,render_template
+
 # importing the fetch data function to main
 from database import fetch_data
 
@@ -13,7 +14,7 @@ def home():
 
 # product routes
 @app.route('/products')
-def prods():
+def products():
     products = fetch_data('products')
     print(products)
     return render_template('products.html',products=products)

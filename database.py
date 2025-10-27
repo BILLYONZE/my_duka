@@ -25,6 +25,7 @@ def insert_products(values):
     conn.commit()
 
 # profits function
+# Profit = (product selling_price  -  product buying_price) * sales quantity of the product
 def total_profit():
     query = 'select p.name,p.id, sum((p.selling_price - p.buying_price) * s.quantity) as total_profit from products as p join sales as s on p.id = s.pid group by p.name, p.id;'
     curr.execute(query)
