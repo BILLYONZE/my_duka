@@ -1,15 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
-    <h1>My Duka Homepage</h1>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
+  <div class="main d-grid m-1">
+    <nav class="navbar navbar-expand-lg bg-body-secondary p-3 fixed-top opacity-50" data-bs-theme="dark">
+      <div class="container-fluid ">
+        <a class="navbar-brand" href="#">Myduka</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end " id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link" href="products">Products</a>
+            <a class="nav-link" href="sales">Sales</a>
+            <a class="nav-link" href="stock">Stock</a>
+            <a class="nav-link btn-outline-success" href=""><i class="fa-solid fa-cart-shopping fa-xl"
+                style="color: #a6a0a0;"></i></a>
+
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid text-center my-5
+    py-3">
+      <h1>Welcome to my duka</h1>
+      <p>Where MyDuka is your Duka</p>
+    </div>
+    <div class="container-fluid d-block w-100">
+      <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+
+          <div class="carousel-item active">
+            <img src="images/frontpage (1).jpg" class="d-block w-100" alt="First slide">
+          </div>
+
+          <div class="carousel-item">
+            <img src="images/frontpage (2).jpg" class="d-block w-100" alt="Second slide">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Monitor Your Shop</h5>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <img src="images/frontpage (3).jpg" class="d-block w-100" alt="Third slide">
+          </div>
+
+        </div>
+        <button class="carousel-control-prev bg-danger" type="button" data-bs-target="#carouselExampleAutoplaying"
+          data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next bg-danger" type="button" data-bs-target="#carouselExampleAutoplaying"
+          data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+    <div class="my-3 text-center" id="about">
+      <p>
+      <h2>With MyDuka</h2><span>
+        <h3>You can Monitor your Stock and Sales easily</h3>
+      </span></p>
+    </div>
+    <div>
+      <!-- cards -->
+      <div class="container my-5">
+        <h3 class="text-center mb-4"> Top Packages</h3>
+        <div class=" row g-4">
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card  ">
+              <img src="images/dub card1.jpg" class=" img-fluid" alt="images/dub card1.jpg">
+              <div class="card-body">
+                <h6 class="fw-bold mt-3">Dubai Tour</h5>
+                  <p class="card-text">Desert Safari and city lights.</p>
+                  <p class=" badge bg-success mb-2"> From $799</p>
+                  <div class="d-grid">
+                    <a href="" class="btn btn-primary">Book</a>
+                  </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card"> <img src="images/zanzibar.jpg" class="card-img-top" alt="images/zanzibar.jpg">
+              <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card "> <img src="images/dubai card 3.jpg" class="card-img-top" alt="images/dubai card 3.jpg">
+              <div class="card-body">
+                <h6 class="fw-bold mt-3">5 Days in Dubai</h5>
+                  <p class="card-text">Enjoy luxury shopping, desert safaris, and skyscrapers.</p>
+                  <p class="badge bg-success mb-2">From $999</p>
+                  <div class="d-grid">
+                    <a href="" class="btn btn-primary">Book</a>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <footer class="bg-dark text-white py-4">
+      <div class="container text-center text-md-start">
+        <div class="row">
+          <div class="col-md-6">
+            <h5>TravelMate</h5>
+            <p>We turn your travel dreams into real adventures.</p>
+          </div>
+          <div class="col-md-3">
+            <h6>Links</h6>
+            <ul class="list-unstyled">
+              <li><a href="#home" class="text-white text-decoration-none">Home</a></li>
+              <li><a href="#about" class="text-white text-decoration-none">About</a></li>
+              <li><a href="#contact" class="text-white text-decoration-none">Contact</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 text-light">
+            <h5>Follow Us</h5>
+            <a href=""><i class="fa-brands fa-facebook fa-lg" style="color: #ffffff;"></i></i></a>
+            <a href=""><i class="fa-brands fa-instagram fa-lg" style="color: #ffffff;"></i></a>
+            <a href=""><i class="fa-brands fa-twitter fa-lg" style="color: #ffffff;"></i></a>
+          </div>
+        </div>
+        <div class="container-fluid">
+          <a class="text-light text-decoration-none text-center" href="">
+            <p>© 2025 TravelMate. All rights reserved.</p>
+          </a>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+    integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+    crossorigin="anonymous"></script>
+
 </body>
+
 </html>

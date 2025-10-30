@@ -8,8 +8,10 @@ conn = psycopg2.connect(
     dbname = 'my_duka',
     password = '11523#Bill'
 )
+
 # declare cursor to perform database operations
 curr = conn.cursor()
+
 
 # create functions to fetch products,sales and stock
 def fetch_data(table_name):
@@ -17,12 +19,27 @@ def fetch_data(table_name):
     data = curr.fetchall()
     return data
 
-# insert products using psycopg2(read on documentation and use commit as per the documentation)
 
+# insert products using psycopg2(read on documentation and use commit as per the documentation)
 def insert_products(values):
     querry = "insert into products(name,buying_price,selling_price) values(%s,%s,%s);"
     curr.execute(querry,values)
     conn.commit()
+
+
+# insert sales 
+def insert_sales(values):
+    querry = "insert into sales(pid,quantity,created_at) values(%s,%s,%s);"
+    curr.execute(querry,values)
+    conn.commit()
+
+
+# inserting stock
+def insert_stock(values):
+    querry = "insert into stock(pid,stock_quantity) values(%s,%s);"
+    curr.execute(querry,values)
+    conn.commit()
+
 
 # profits function
 # Profit = (product selling_price  -  product buying_price) * sales quantity of the product
