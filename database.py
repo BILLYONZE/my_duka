@@ -40,18 +40,63 @@ def insert_stock(values):
     curr.execute(querry,values)
     conn.commit()
 
+# Inserting users
+def insert_users(values):
+    querry = 'insert into users(full_name,email,password) values(%s,%s,%s);'
+    curr.execute(querry,values)
+    conn.commit()
+
 
 # profits function
 # Profit = (product selling_price  -  product buying_price) * sales quantity of the product
 def total_profit():
-    query = 'select p.name,p.id, sum((p.selling_price - p.buying_price) * s.quantity) as total_profit from products as p join sales as s on p.id = s.pid group by p.name, p.id;'
+    query = 'select p.name, sum((p.selling_price - p.buying_price) * s.quantity) as total_profit from products as p join sales as s on p.id = s.pid group by p.name;'
     curr.execute(query)
     profit = curr.fetchall()
     return profit
 
 # sales function
 def total_sales():
-    query = 'select p.name,p.id,sum(p.selling_price * s.quantity) as total_sales from products as p join sales as s on p.id =s.pid group by p.name,p.id'
+    query = 'select p.name,p.id,sum(p.selling_price * s.quantity) as total_sales from products as p join sales as s on p.id =s.pid group by p.name,p.id;'
     curr.execute(query)
     sales = curr.fetchall()
     return sales
+# Profit per day
+def get_profit_day():
+    querry='SELECT DATE (S.created_at) AS sale_date,sum((p.selling_price-p.buying_price)*s.quantity) AS total_profit ' \
+    'FROM sales AS S Join products P on s.id=p.id group by DATE(s.created_at)' \
+    ' ORDER BY sale_date;'
+    curr.execute(querry)
+    rows=curr.fetchall()
+    # print (data)
+    return rows
+
+ # sales per day
+def get_sales_per_day():
+    curr = conn.cursor()
+    querry = "SELECT DATE(s.created_at) AS day,SUM(p.selling_price * s.quantity) AS total_sales FROM sales AS s JOIN products AS p ON s.pid = p.id GROUP BY DATE(s.created_at)ORDER BY DATE(s.created_at);"
+    curr.execute(querry)
+    rows = curr.fetchall()
+    result = tuple((row[0], float(row[1] or 0)) for row in rows)
+    return result
+
+
+# def sales_day():
+#     query='SELECT DATE (s.created_at) AS Day,sum(p.selling_price * s.quantity) AS Total_sales FROM sales AS S JOIN products AS P on s.id=p.id GROUP BY DATE (s.created_at) ORDER BY DATE(s.created_at);'
+#     curr.execute(query)
+#     data=curr.fetchall()
+#     # print (data)
+#     return data
+
+# get sales per day
+# def get_sales_per_day():
+#     querry="SELECT DATE(s.created_at) AS day, SUM(p.selling_price * s.quantity) AS total_sales FROM sales AS s JOIN products AS p ON s.pid = p.id GROUP BY DATE(s.created_at) ORDER BY DATE(s.created_at);",
+#     curr.execute(querry)
+#     data=curr.fetchall()
+#     return data
+# check email
+def check_email(email):
+    querry="select * from users where email =%s ;"
+    curr.execute(querry,(email,))
+    data = curr.fetchone()
+    return data
