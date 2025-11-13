@@ -60,9 +60,64 @@
                 <div class="col-6">
                     <canvas id="bar-chart-horizontal" width="800" height="450"></canvas>
                 </div>
-                <div class="col-6">
-                    <canvas id="bar-chart" width="800" height="450"></canvas>
+                <div class="container-fluid m-5 display d-flex ">
+                    <div class="col-6" style="width: 18rem;">
+                        <div class="card-body border p-4 border-2">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.
+                            </p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <canvas id="line-chart" width="800" height="450"></canvas>
+                    </div>
                 </div>
+                <div id="cards" class="m-4">
+                    <!-- first -->
+                    <div class="col-md-4 col-lg-3">
+                        <div class="card text-center shadow-sm border-primary">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary"><i class="bi bi-box-seam me-2"></i> Total Products
+                                </h5>
+                                <h3 class="fw-bold">{{ total_products }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- second -->
+                    <div class="col-md-4 col-lg-3">
+                        <div class="card text-center shadow-sm border-primary">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary"><i class="bi bi-box-seam me-2"></i> Total Products
+                                </h5>
+                                <h3 class="fw-bold">{{ total_products }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- third -->
+                    <div class="col-md-4 col-lg-3">
+                        <div class="card text-center shadow-sm border-primary">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary"><i class="bi bi-box-seam me-2"></i> Total Products
+                                </h5>
+                                <h3 class="fw-bold">{{ total_products }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Total Products -->
+
+
+                <!-- Total Sales -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="card text-center shadow-sm border-info">
+                        <div class="card-body">
+                            <h5 class="card-title text-info"><i class="bi bi-cart-check me-2"></i> Total Sales</h5>
+                            <h3 class="fw-bold">KSh {{ total_sales }}</h3>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -71,27 +126,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
     <script>
-
-        // piechart for Profits of each product
-        //         new Chart(document.getElementById("bar-chart"), {
-        //             type: 'pie',
-        //             data: {
-        //                 labels: {{ product_name | safe}},
-        //             datasets: [
-        //             {
-        //                 label: "TOTAL PRODUCTS STOCK",
-        //                 backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
-        //                 data: {{ product_profit | safe}}
-        //         }
-        //         ]
-        //     },
-        //             options: {
-        //             title: {
-        //                 display: true,
-        //                 text: 'Total Stock available'
-        //             }
-        //         }
-        // });
 
         // Doughnut chart
         new Chart(document.getElementById("doughnut-chart"), {
@@ -136,29 +170,31 @@
         }
         });
 
-        // bar graph
-        // Bar chart
-        new Chart(document.getElementById("bar-chart"), {
-            type: 'bar',
+        // line chart
+        new Chart(document.getElementById("line-chart"), {
+            type: 'line',
             data: {
-                labels: {{product_name| safe}},
-                datasets: [
-                    {
-                        label: "sales per day",
-                        backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
-                        data: {{ sales_per_day | safe}}
-                    }
-                ]
+                labels: {{ dates | safe}},
+            datasets: [{
+                data: {{ profit_per_day | safe}},
+            label: "Profits per Day",
+            borderColor: "#3e95cd",
+            fill: false
+                }, {
+                data: {{ sales_per_day | safe}},
+            label: "Sales Per Day",
+            borderColor: "#8e5ea2",
+            fill: false
+                }
+        ]
             },
             options: {
-                legend: { display: false },
-                title: {
-                    display: true,
-                    text: 'sales per day'
-                }
+            title: {
+                display: true,
+                text: 'Profit and Sales Per day'
             }
+        }
         });
-
     </script>
 
 </body>

@@ -61,6 +61,7 @@ def total_sales():
     curr.execute(query)
     sales = curr.fetchall()
     return sales
+
 # Profit per day
 def get_profit_day():
     querry='SELECT DATE (S.created_at) AS sale_date,sum((p.selling_price-p.buying_price)*s.quantity) AS total_profit ' \
@@ -76,27 +77,24 @@ def get_sales_per_day():
     curr = conn.cursor()
     querry = "SELECT DATE(s.created_at) AS day,SUM(p.selling_price * s.quantity) AS total_sales FROM sales AS s JOIN products AS p ON s.pid = p.id GROUP BY DATE(s.created_at)ORDER BY DATE(s.created_at);"
     curr.execute(querry)
-    rows = curr.fetchall()
-    result = tuple((row[0], float(row[1] or 0)) for row in rows)
+    result = curr.fetchall()
     return result
 
-
-# def sales_day():
-#     query='SELECT DATE (s.created_at) AS Day,sum(p.selling_price * s.quantity) AS Total_sales FROM sales AS S JOIN products AS P on s.id=p.id GROUP BY DATE (s.created_at) ORDER BY DATE(s.created_at);'
-#     curr.execute(query)
-#     data=curr.fetchall()
-#     # print (data)
-#     return data
-
-# get sales per day
-# def get_sales_per_day():
-#     querry="SELECT DATE(s.created_at) AS day, SUM(p.selling_price * s.quantity) AS total_sales FROM sales AS s JOIN products AS p ON s.pid = p.id GROUP BY DATE(s.created_at) ORDER BY DATE(s.created_at);",
-#     curr.execute(querry)
-#     data=curr.fetchall()
-#     return data
 # check email
 def check_email(email):
     querry="select * from users where email =%s ;"
     curr.execute(querry,(email,))
     data = curr.fetchone()
     return data
+
+# update Products
+def update_product(name,buying_price,selling_price, id):
+    querry = f"update products set name=%s ,buying_price=%s,selling_price=%s where id=%s;"
+    curr.execute(querry,(name,buying_price,selling_price, id))
+    conn.commit()
+
+# update sales
+def update_sales(id,quantity):
+    querry = f"update sales set quantity=%s where id = %s;"
+    curr.execute(querry,(id,quantity))
+    conn.commit()

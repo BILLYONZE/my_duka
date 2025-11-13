@@ -1,6 +1,6 @@
 # Importing flask 
 from flask import Flask,render_template,request,redirect,url_for,flash,session
-from database import fetch_data, get_profit_day, get_sales_per_day,insert_products,insert_sales,insert_stock,total_profit,insert_users,check_email,total_sales
+from database import fetch_data, get_profit_day, get_sales_per_day,insert_products,insert_sales,insert_stock,total_profit,insert_users,check_email,total_sales,update_product, update_sales
 from flask_bcrypt import Bcrypt
 
 # importing the fetch data function to main
@@ -76,7 +76,6 @@ def add_stock():
 @app.route('/stock')
 def stock():
     stock=fetch_data('stock')
-    # print(stock)
     products=fetch_data('products')
     return render_template('stock.html', stocks = stock ,products=products)
 
@@ -88,6 +87,12 @@ def dashboard():
     product_name =[]
     product_profit=[]
     total_sale = []
+    # profit_sum = []
+    # # total Profits
+    # for pro in profits:
+    #     pro[1] += profit_sum
+    #     profit_sum.append(float(profit_sum))
+
     # profit per product
     for i in profits:
         product_name.append(i[0])
@@ -99,31 +104,20 @@ def dashboard():
     # Profit per day and # sales per day
     p_day = get_profit_day()
     sales_data = get_sales_per_day()
-    dates = [row[0].strftime('%Y-%m-%d') for row in sales_data]
-    sales_per_day = [float(row[1]) for row in sales_data]
-    # profit_per_day = [i[1] for i in p_day]   
+    dates = []
+    sales_per_day = []
+    for i in sales_data:
+        dates.append(str(i[0]))
+        sales_per_day.append(float(i[1]))
+    profit_per_day = []  
+    for i in p_day:
+        profit_per_day.append (float(i[1]))
     return render_template( 'dashboard.html',product_name=product_name ,
-    product_profit=product_profit,total_sale=total_sale,dates=dates,sales_per_day=sales_per_day)
-    # profit_per_day=profit_per_day
+    product_profit=product_profit,total_sale=total_sale,dates=dates,
+    sales_per_day=sales_per_day, profit_per_day=profit_per_day,
+    )
 
-# @app.route('/dashboard')
-# @login_required
-# def dashboard():
-#     # --- sales per day ---
-#     sales_data = get_sales_per_day()
-
-#     # unpack tuples
-#     dates = tuple(item[0] for item in sales_data)
-#     sales_per_day = tuple(item[1] for item in sales_data)
-
-#     return render_template(
-#         'dashboard.html',
-#         dates=dates,
-#         sales_per_day=sales_per_day,
-#         # … include other context variables …
-#     )
-
-# register
+# regiter 
 @app.route('/register', methods =['GET','POST'])
 def register():
 # check the method
@@ -168,10 +162,32 @@ def login():
                 flash("Invalid Password",'danger')
                 return redirect(url_for("register"))
     return render_template("login.html")     
-   
+
+# route to update products
+@app.route('/update_product', methods=['GET','POST'])
+def update_products():
+    if request.method=='POST':
+        id=request.form["id"]
+        p_name = request.form["product_name"]
+        bp = request.form["buying_price"]
+        sp = request.form["selling_price"]
+        update_product(p_name,bp,sp,id)
+        flash("Product Updated")
+    return redirect(url_for("products"))
+
+# Updating_sales
+@app.route("/update_sales",methods=['GET','POST'])
+def edit_sales():
+    if request.method=='POST':
+        id = request.form["id"]
+        quantity = request.form["salesquantity"]
+        update_sales(id,quantity)
+        flash("Sales Edited")
+    return redirect(url_for("sales"))
+
 app.run(debug=True)
  
-# How to use Jinja
+ 
 # 1. Variables are written inside double curly braces{{}} and the Variable itself must be declared in a render_template function
 # 2.A python operstion is written inside single curly braces{} with percentage signs{ % for i in sequence% } and the operation must be closed{%endfor%}
 
